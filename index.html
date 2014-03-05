@@ -1,26 +1,63 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta name="description" content="prioprepare" />
 <meta charset=utf-8 />
-<title>prioprepare</title>
+<title>Prioprepare</title>
   
-<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>
+<script src="lib/sha256.js"></script>
+
+<!-- style from http://bootswatch.com/journal/ -->
+<link href="bootswatch-journal.css" rel="stylesheet" type="text/css">
+<link href="prioprepare.css" rel="stylesheet" type="text/css">
 
 </head>
 
-<body>
-  <p><input type="file" id="file-input" /></p>
+<body id="js-dropbox">
+<div id="drop-mask"></div>
 
-  <p>Result:</p>
+<div class="container">
+
+  <div class="page-header">
+    <h1>Prioprepare <small>Priority for everyone</small></h1>
+  </div>
+  
+  <p>
+    Use this tool to compute a <strong>hash value</strong> from a document, then copy it to the text fields of a <strong>bank transfer</strong>.
+    <br>
+    This is an <strong>evidence of the existence</strong> of the content of this document at this date.
+  </p>
+  
+  <div class="alert alert-info alert-box" id="js-drophere" style="display:none;"></div>
+
+  <form role="form">
+    <div class="form-group">
+      <label for="file-input">Your file</label>
+      <input type="file" id="file-input" name="file"/>
+      <p class="help-block">Pick or drag and drop a file to compute its hash value.</p>
+    </div>
+  
+    <div class="form-group">
+      <label for="output" class="control-label">Result</label>
+      <output for="file-input">
+        <textarea class="form-control" id="output" cols="35" rows="4" wrap="hard" readonly placeholder="hash value" onclick="this.focus();this.select()"></textarea>
+      </output>
+      <span class="help-block" id="todo-next"></span>
+    </div>
+    
+  </form>
+
+  <!-- 
 	<p>
 	  <input type="text" id="sliced-output-0"/>
 	  <input type="text" id="sliced-output-1"/>
 	  <input type="text" id="sliced-output-2"/>
 	  <input type="text" id="sliced-output-3"/>
 	</p>
+	-->
 
-  <p>hash: <output id="output" for="file-input"></output></p>
+</div><!-- /.container -->
 
 <script src="prioprepare.js"></script>
 </body>
