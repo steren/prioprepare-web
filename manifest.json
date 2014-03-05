@@ -1,0 +1,11 @@
+{
+  "name": "Prioprepare",
+  "description": "Hash your document to store it in a bank transfer",
+  "version": "1.0",
+  "app": {
+    "background": {
+      "scripts": ["background.js"]
+    }
+  },
+  "icons": { "16": "prioprepare-16.png", "128": "prioprepare-128.png" }
+}
