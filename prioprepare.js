@@ -6,13 +6,16 @@ if (window.File && window.FileReader) {
   alert('Sorry, your brower does not support features needed for this service.');
 }
 
+var fileInput = document.getElementById('file-input');
+var drophere = document.getElementById('js-drophere');
+var dropbox = document.getElementById("js-dropbox");
+var dropmask = document.getElementById("drop-mask");
 
 var hashFile = function(fileAsText) {
   // we are using cryptoJS https://code.google.com/p/crypto-js/
   var hash = CryptoJS.SHA256(fileAsText);
   return hash.toString(CryptoJS.enc.Hex);
 };
-
 
 function handleFiles(/* FileList */ files) {
   if(files.length === 0) {
@@ -27,6 +30,10 @@ function handleFiles(/* FileList */ files) {
   reader.onload = function(e) {
     
     var hash = hashFile(e.target.result);
+    
+    // hide file input and display file name instead
+    document.getElementById('filename').innerText = f.name;
+    fileInput.style.display = 'none';
     
     var cleanedName = f.name;
     cleanedName.replace(/[^A-Z0-9.\-]/gi, '');
@@ -50,16 +57,10 @@ function handleFiles(/* FileList */ files) {
   reader.readAsText(f);
 }
 
-var fileInput = document.getElementById('file-input');
-
 var onFileInputChange = function(e) {
   handleFiles(e.target.files);
 };
 fileInput.addEventListener('change', onFileInputChange, false);
-
-var drophere = document.getElementById('js-drophere');
-var dropbox = document.getElementById("js-dropbox")
-var dropmask = document.getElementById("drop-mask");
 
 var addDropInfo = function() {
   dropmask.style.display = 'block';
@@ -88,7 +89,7 @@ var drop = function (e) {
   var files = dt.files;
 
   // this will trigger a "change" event for the inpur element
-  fileInput.files = files;
+  handleFiles(files);
 };
 
 var dragover = function(e) {
