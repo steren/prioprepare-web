@@ -26,3 +26,20 @@ html, body
   cursor: auto;
   background-color: #ffffff;
 }
+
+/* when height is small, for example in Chrome app of iframe embed  */
+@media (max-height: 300px) {
+
+  .hidden-smallheight {
+    display:none;
+  }
+
+  .alert-box {
+    top: 20px;
+  }
+  
+  .container {
+    margin-top: 20px;
+  }
+
+}
