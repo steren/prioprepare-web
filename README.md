@@ -16,7 +16,10 @@ Contributing
 
 ### Improvements
 
-* use [JSzip](http://stuartk.com/jszip/) to create a ready to be stored zip file with original file anf txt file containing hash.
+* Use `FileReader.readAsBinaryString()` instead of `FileReader.readAsText()` because results on binary files differs from Prioprepare Windows.
+* When file is big, result can take time to be computed. Display loading percentage.
+* Display a help button that goes to http://rschoenm.github.io/prioprepare/
+* Use [JSzip](http://stuartk.com/jszip/) to create a ready to be stored zip file with original file anf txt file containing hash.
 
 
 ### Code architecture
