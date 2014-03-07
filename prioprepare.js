@@ -32,7 +32,7 @@ function handleFiles(/* FileList */ files) {
     var hash = hashFile(e.target.result);
     
     // hide file input and display file name instead
-    document.getElementById('filename').innerText = f.name;
+    document.getElementById('filename').textContent = f.name;
     fileInput.style.display = 'none';
     
     var cleanedName = f.name;
@@ -45,7 +45,7 @@ function handleFiles(/* FileList */ files) {
     document.getElementById('output').value = finalText;
     document.getElementById('output').classList.add('non-disabled')
     
-    document.getElementById('todo-next').innerText = 'Copy this entire text in a bank transfert statement.'
+    document.getElementById('todo-next').textContent = 'Copy this entire text in a bank transfert statement.'
     
     // document.getElementById('sliced-output-0').value = hash.substr(0*16, 16);
     // document.getElementById('sliced-output-1').value = hash.substr(1*16, 16);
