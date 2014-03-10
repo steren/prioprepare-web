@@ -24,37 +24,36 @@ function handleFiles(/* FileList */ files) {
   }
 
   var f = files[0];
-  
+
   var reader = new FileReader();
-  
+
   reader.onload = function(e) {
-    
+
     var hash = hashFile(e.target.result);
-    
+
     // hide file input and display file name instead
     document.getElementById('filename').textContent = f.name;
     fileInput.style.display = 'none';
-    
+
     var cleanedName = f.name;
     cleanedName.replace(/[^A-Z0-9.\-]/gi, '');
-    
+
     var finalText = 'SHA256 hash value ' + hash + ' ' + cleanedName;
-    
+
     console.log(finalText);
-    
+
     document.getElementById('output').value = finalText;
     document.getElementById('output').classList.add('non-disabled')
-    
     document.getElementById('todo-next').textContent = 'Copy this entire text in a bank transfert statement.'
-    
+
     // document.getElementById('sliced-output-0').value = hash.substr(0*16, 16);
     // document.getElementById('sliced-output-1').value = hash.substr(1*16, 16);
     // document.getElementById('sliced-output-2').value = hash.substr(2*16, 16);
     // document.getElementById('sliced-output-3').value = hash.substr(3*16, 16);
-    
+
   };
-  
-  reader.readAsText(f);
+
+  reader.readAsBinaryString(f);
 }
 
 var onFileInputChange = function(e) {
@@ -64,7 +63,7 @@ fileInput.addEventListener('change', onFileInputChange, false);
 
 var addDropInfo = function() {
   dropmask.style.display = 'block';
-  
+
   // display a "drop here" message
   drophere.style.display = 'block';
   drophere.innerHTML = '<strong>Drop</strong> this file anywhere on this window to compute its hash value.';
@@ -94,7 +93,7 @@ var drop = function (e) {
 
 var dragover = function(e) {
   console.log("dragover");
-  
+
   e.preventDefault();
   addDropInfo();
 };
