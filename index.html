@@ -7,10 +7,13 @@
 <title>Prioprepare</title>
 
 <script src="lib/jquery-2.0.js"></script>
+<script src="lib/nprogress.js"></script>
+<script src="lib/sha256.js"></script>
 
 <!-- style from http://bootswatch.com/simplex/ -->
 <link href="css/bootswatch.css" rel="stylesheet" type="text/css">
 <link href="css/prioprepare.css" rel="stylesheet" type="text/css">
+<link href="css/nprogress.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -39,10 +42,6 @@
       <input type="file" id="file-input" name="file"/>
       <p id="filename"></p>
       <p class="help-block">Pick or drag and drop a file to compute its hash value.</p>
-    </div>
-
-    <div class="progress">
-      <div class="progress-bar" id="progress-bar" style="width: 0%;"></div>
     </div>
 
     <div class="form-group">

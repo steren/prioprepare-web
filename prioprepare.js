@@ -1,4 +1,4 @@
-/*global CryptoJS */
+/*global CryptoJS, NProgress */
 
 if (window.File && window.FileReader) {
   // Great success! All the File APIs are supported.
@@ -8,9 +8,8 @@ if (window.File && window.FileReader) {
 
 var fileInput = document.getElementById('file-input');
 var drophere = document.getElementById('js-drophere');
-var dropbox = document.getElementById("js-dropbox");
-var dropmask = document.getElementById("drop-mask");
-var progressBar = document.getElementById('progress-bar');
+var dropbox = document.getElementById('js-dropbox');
+var dropmask = document.getElementById('drop-mask');
 
 var hashFile = function(fileAsArrayBuffer) {
   // we are using cryptoJS https://code.google.com/p/crypto-js/
@@ -49,24 +48,17 @@ function handleFiles(/* FileList */ files) {
   reader.onprogress = function(evt) {
     // evt is an ProgressEvent.
     if (evt.lengthComputable) {
-      var percentLoaded = Math.round((evt.loaded / evt.total) * 100);
-      // Increase the progress bar length.
-      if (percentLoaded < 100) {
-        progressBar.style.width = percentLoaded + '%';
-      }
+      NProgress.set(evt.loaded / evt.total);
     }
   }
 
 
   reader.onloadstart = function(e) {
-    progressBar.style.width = '0%';
-    progressBar.style.opacity = '1';
+    NProgress.start();
   };
 
   reader.onload = function(e) {
-
-    progressBar.style.width = '100%';
-    progressBar.style.opacity = '0.3';
+    NProgress.done();
 
     var hash = hashFile(e.target.result);
 
