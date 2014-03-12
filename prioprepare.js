@@ -11,9 +11,9 @@ var drophere = document.getElementById('js-drophere');
 var dropbox = document.getElementById("js-dropbox");
 var dropmask = document.getElementById("drop-mask");
 
-var hashFile = function(fileAsText) {
+var hashFile = function(fileAsArrayBuffer) {
   // we are using cryptoJS https://code.google.com/p/crypto-js/
-  var hash = CryptoJS.SHA256(fileAsText);
+  var hash = CryptoJS.SHA256(CryptoJS.lib.WordArray.create(fileAsArrayBuffer));
   return hash.toString(CryptoJS.enc.Hex);
 };
 
@@ -53,7 +53,7 @@ function handleFiles(/* FileList */ files) {
 
   };
 
-  reader.readAsBinaryString(f);
+  reader.readAsArrayBuffer(f);
 }
 
 var onFileInputChange = function(e) {
