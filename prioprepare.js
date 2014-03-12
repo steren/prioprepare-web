@@ -10,12 +10,29 @@ var fileInput = document.getElementById('file-input');
 var drophere = document.getElementById('js-drophere');
 var dropbox = document.getElementById("js-dropbox");
 var dropmask = document.getElementById("drop-mask");
+var progressBar = document.getElementById('progress-bar');
 
 var hashFile = function(fileAsArrayBuffer) {
   // we are using cryptoJS https://code.google.com/p/crypto-js/
   var hash = CryptoJS.SHA256(CryptoJS.lib.WordArray.create(fileAsArrayBuffer));
   return hash.toString(CryptoJS.enc.Hex);
 };
+
+
+function errorHandler(evt) {
+  switch(evt.target.error.code) {
+    case evt.target.error.NOT_FOUND_ERR:
+      document.getElementById('todo-next').textContent = 'File Not Found!';
+      break;
+    case evt.target.error.NOT_READABLE_ERR:
+      document.getElementById('todo-next').textContent = 'File is not readable';
+      break;
+    case evt.target.error.ABORT_ERR:
+      break; // noop
+    default:
+      document.getElementById('todo-next').textContent = 'An error occurred reading this file.';
+  };
+}
 
 function handleFiles(/* FileList */ files) {
   if(files.length === 0) {
@@ -27,7 +44,29 @@ function handleFiles(/* FileList */ files) {
 
   var reader = new FileReader();
 
+  reader.onerror = errorHandler;
+
+  reader.onprogress = function(evt) {
+    // evt is an ProgressEvent.
+    if (evt.lengthComputable) {
+      var percentLoaded = Math.round((evt.loaded / evt.total) * 100);
+      // Increase the progress bar length.
+      if (percentLoaded < 100) {
+        progressBar.style.width = percentLoaded + '%';
+      }
+    }
+  }
+
+
+  reader.onloadstart = function(e) {
+    progressBar.style.width = '0%';
+    progressBar.style.opacity = '1';
+  };
+
   reader.onload = function(e) {
+
+    progressBar.style.width = '100%';
+    progressBar.style.opacity = '0.3';
 
     var hash = hashFile(e.target.result);
 
