@@ -32,6 +32,10 @@ html, body
   float: right;
 }
 
+.help:hover, .help:visited {
+  color: rgb(120, 120, 120);
+}
+
 /* when height is small, for example in Chrome app of iframe embed  */
 @media (max-height: 300px) {
 
@@ -47,4 +51,9 @@ html, body
     padding-top: 20px;
   }
 
+  .help {
+    margin-top: 20px;
+  }
+
 }
+

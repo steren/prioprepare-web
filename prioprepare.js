@@ -10,6 +10,12 @@ var fileInput = document.getElementById('file-input');
 var drophere = document.getElementById('js-drophere');
 var dropbox = document.getElementById('js-dropbox');
 var dropmask = document.getElementById('drop-mask');
+var output = document.getElementById('output');
+
+output.onclick = function() {
+  output.focus();
+  output.select();
+};
 
 var hashFile = function(fileAsArrayBuffer) {
   // we are using cryptoJS https://code.google.com/p/crypto-js/
@@ -73,15 +79,12 @@ function handleFiles(/* FileList */ files) {
 
     console.log(finalText);
 
-    document.getElementById('output').value = finalText;
-    document.getElementById('output').classList.add('non-disabled')
-    document.getElementById('todo-next').textContent = 'Copy this entire text in a bank transfert statement.'
+    output.value = finalText;
+    output.classList.add('non-disabled');
+    output.focus();
+    output.select();
 
-    // document.getElementById('sliced-output-0').value = hash.substr(0*16, 16);
-    // document.getElementById('sliced-output-1').value = hash.substr(1*16, 16);
-    // document.getElementById('sliced-output-2').value = hash.substr(2*16, 16);
-    // document.getElementById('sliced-output-3').value = hash.substr(3*16, 16);
-
+    document.getElementById('todo-next').textContent = 'Copy this entire text in a bank transfert statement.';
   };
 
   reader.readAsArrayBuffer(f);
