@@ -16,8 +16,7 @@ Contributing
 
 ### Improvements
 
-* When file is big, result can take time to be computed. Display loading percentage.
-* Display a help button that goes to http://rschoenm.github.io/prioprepare/
+* When file is big, result can take time to be computed. Display loading percentage also for hashing (not only for file loading)
 * Use [JSzip](http://stuartk.com/jszip/) to create a ready to be stored zip file with original file anf txt file containing hash.
 
 
